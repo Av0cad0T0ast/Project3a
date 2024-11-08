@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Data Visualizer</title>
+</head>
+<body>
+    <h1>Stock Data Visualizer</h1>
+    <form action="/" method="POST">
+        <label for="symbol">Choose Symbol:</label>
+        <select name="symbol" id="symbol">
+            {% for symbol in symbols %}
+                <option value="{{ symbol }}">{{ symbol }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="chartType">Choose Chart Type:</label>
+        <select name="chartType" id="chartType">
+            {% for type in chartTypes %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="timeSeries">Choose Time Series:</label>
+        <select name="timeSeries" id="timeSeries">
+            {% for ts in timeSeriesKeys %}
+                <option value="{{ ts }}">{{ ts }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" name="startDate" id="startDate">
+        <br>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" name="endDate" id="endDate">
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

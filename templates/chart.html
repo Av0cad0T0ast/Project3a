@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Chart</title>
+</head>
+<body>
+    <h1>Stock Chart</h1>
+
+    <form action="/" method="POST">
+        <label for="symbol">Choose Symbol:</label>
+        <select name="symbol" id="symbol">
+            {% for symbol in symbols %}
+                <option value="{{ symbol }}" {% if symbol == request.args.get('symbol') %}selected{% endif %}>{{ symbol }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="chartType">Choose Chart Type:</label>
+        <select name="chartType" id="chartType">
+            {% for type in chartTypes %}
+                <option value="{{ type }}" {% if type == request.args.get('chart_type') %}selected{% endif %}>{{ type }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="timeSeries">Choose Time Series:</label>
+        <select name="timeSeries" id="timeSeries">
+            {% for ts in timeSeriesKeys %}
+                <option value="{{ ts }}" {% if ts == request.args.get('time_series') %}selected{% endif %}>{{ ts }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" name="startDate" id="startDate" value="{{ request.args.get('start_date') }}">
+        <br>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" name="endDate" id="endDate" value="{{ request.args.get('end_date') }}">
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if chart_svg %}
+        <div>
+            <img src="{{ chart_svg }}" alt="Stock Chart">
+        </div>
+    {% else %}
+        <p>No data available for the selected options.</p>
+    {% endif %}
+</body>
+</html>
